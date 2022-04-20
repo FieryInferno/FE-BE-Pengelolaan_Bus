@@ -4,6 +4,7 @@ import './scss/style.scss';
 
 const App = () => {
   const Login = React.lazy(() => import('./views/pages/Login'));
+  const Dashboard = React.lazy(() => import('./views/pages/Dashboard'));
 
   const loading = (
     <div className="pt-3 text-center">
@@ -17,6 +18,12 @@ const App = () => {
         <Routes>
           <Route path="/" name="Login" element={<Login />} />
           <Route exact path="/login" name="Login Page" element={<Login />} />
+          <Route
+            exact
+            path="/dashboard"
+            name="Dashboard"
+            element={<Dashboard />}
+          />
         </Routes>
       </React.Suspense>
     </HashRouter>

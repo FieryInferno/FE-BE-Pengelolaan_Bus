@@ -24,7 +24,7 @@ const Login = (props) => {
   const onSubmit = () => {
     dispatch(login(values))
         .then((data) => {
-          navigate('/home');
+          navigate('/dashboard');
         })
         .catch((e) => addToast(exampleToast));
   };
