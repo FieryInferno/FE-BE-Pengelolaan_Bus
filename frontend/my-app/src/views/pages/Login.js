@@ -1,16 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCardGroup,
-  CCol,
-  CContainer,
-  CForm,
-  CFormInput,
-  CInputGroup,
-  CInputGroupText,
-  CRow,
+  CButton, CCard, CCardBody, CCardGroup, CCol, CContainer, CForm, CFormInput,
+  CInputGroup, CInputGroupText, CRow, CToaster, CToast, CToastBody,
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
 import {cilLockLocked, cilUser} from '@coreui/icons';
@@ -22,15 +13,20 @@ const Login = (props) => {
   const [values, setValues] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const toaster = useRef();
+  const [toast, addToast] = useState(0);
+  const exampleToast = (
+    <CToast title="CoreUI for React.js" color="danger">
+      <CToastBody>User not found</CToastBody>
+    </CToast>
+  );
 
   const onSubmit = () => {
     dispatch(login(values))
         .then((data) => {
           navigate('/home');
         })
-        .catch((e) => {
-          console.log(e);
-        });
+        .catch((e) => addToast(exampleToast));
   };
 
   return (
@@ -93,6 +89,7 @@ const Login = (props) => {
           </CCol>
         </CRow>
       </CContainer>
+      <CToaster ref={toaster} push={toast} placement="top-center" />
     </div>
   );
 };
